@@ -64,14 +64,21 @@ const AddRating = () => {
         padding: '30px'
       }}>
         {/* Home Button */}
-        <div style={{ textAlign: 'right' }}>
-          <img
-            src="https://i.ibb.co/fkw6TMy/Screenshot-2024-09-28-at-4-29-46-PM.png"
-            alt="Home"
-            style={{ width: '30px', height: '30px', cursor: 'pointer' }}
-            onClick={handleHomeClick}
-          />
-        </div>
+        <div style={{ position: 'relative', textAlign: 'right' }}>
+  <img
+    src="https://i.ibb.co/fkw6TMy/Screenshot-2024-09-28-at-4-29-46-PM.png"
+    alt="Home"
+    style={{ 
+      width: '50px', 
+      height: '50px', 
+      cursor: 'pointer', 
+      position: 'absolute', // Use absolute positioning
+      top: '10px', // Adjust this to move it lower
+      right: '50px' // Adjust this to move it more to the left
+    }}
+    onClick={handleHomeClick}
+  />
+</div>
 
         <h2>Add Rating</h2>
 
@@ -137,27 +144,33 @@ const AddRating = () => {
           />
           <span>{availability}/10</span>
 
-          {/* Checkbox for inPerson and Zoom */}
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                name="inPerson"
-                checked={isInPerson}
-                onChange={(e) => setIsInPerson(e.target.checked)}
-              />
-              In Person
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="zoom"
-                checked={isZoom}
-                onChange={(e) => setIsZoom(e.target.checked)}
-              />
-              Zoom
-            </label>
-          </div>
+        {/* Checkbox for inPerson and Zoom */}
+{/* Checkbox for inPerson and Zoom */}
+<div style={{ display: 'flex', alignItems: 'center' }}>
+  <label style={{ marginRight: '20px', display: 'flex', alignItems: 'center' }}>
+    <span style={{ whiteSpace: 'nowrap' }}>In Person</span>
+    <input
+      type="checkbox"
+      name="inPerson"
+      checked={isInPerson}
+      onChange={(e) => setIsInPerson(e.target.checked)}
+      style={{ marginLeft: '5px', marginTop: '12px' }} // Adjust spacing between label and checkbox
+    />
+  </label>
+  <label style={{ display: 'flex', alignItems: 'center' }}>
+    <span style={{ whiteSpace: 'nowrap' }}>Zoom</span>
+    <input
+      type="checkbox"
+      name="zoom"
+      checked={isZoom}
+      onChange={(e) => setIsZoom(e.target.checked)}
+      style={{ marginLeft: '5px', marginTop: '12px'}} // Adjust spacing between label and checkbox
+    />
+  </label>
+</div>
+
+
+
 
           {/* Comments Section */}
           <label htmlFor="comments">Comments:</label>
