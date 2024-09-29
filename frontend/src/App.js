@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NewUser from './newUser'; // Your home component or other components
 import Home from './homePage';
 import Found from './userfound'; 
+import AddRate from './AddRate';
 const App = () => {
   return (
     <Router>
@@ -10,6 +11,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/newUser" element={<NewUser/>} />
         <Route path="/userFound" element={<Found/>} />
+        <Route path= "/addRating" element={<AddRate />} />
 
 
         {/* Add more routes here if needed */}
