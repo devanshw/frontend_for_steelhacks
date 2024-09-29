@@ -49,6 +49,31 @@ const UserDetails = () => {
     }
   };
 
+  // Grading function to convert average score to a letter grade
+  const getLetterGrade = (averageScore) => {
+    if (averageScore >= 9.8) return 'A+';
+    if (averageScore >= 9.3) return 'A';
+    if (averageScore >= 9.0) return 'A-';
+    if (averageScore >= 8.7) return 'B+';
+    if (averageScore >= 8.3) return 'B';
+    if (averageScore >= 8.0) return 'B-';
+    if (averageScore >= 7.7) return 'C+';
+    if (averageScore >= 7.3) return 'C';
+    if (averageScore >= 7.0) return 'C-';
+    if (averageScore >= 6.7) return 'D+';
+    if (averageScore >= 6.3) return 'D';
+    if (averageScore >= 6.0) return 'D-';
+    return 'F';
+  };
+
+  const getGradeColorClass = (letterGrade) => {
+    if (letterGrade === 'A+' || letterGrade === 'A' || letterGrade === 'A-') return 'grade-green';
+    if (letterGrade === 'B+' || letterGrade === 'B' || letterGrade === 'B-') return 'grade-blue';
+    if (letterGrade === 'C+' || letterGrade === 'C' || letterGrade === 'C-') return 'grade-yellow';
+    if (letterGrade === 'D+' || letterGrade === 'D' || letterGrade === 'D-') return 'grade-orange';
+    return 'grade-red'; // For 'F'
+  };
+
   return (
     <div className="user-details-container">
       
@@ -64,7 +89,8 @@ const UserDetails = () => {
           
           <div className="user-details">
             <p><strong>Course Name:</strong> {user.courseName}</p>
-            <p><strong>Department:</strong> {user.departmentName}</p>
+            <p><strong>Department:</strong> {user.departmentName.toUpperCase()}</p>
+
 
             <div className="side-by-side">
               <p><strong>Knowledge of Subject:</strong> </p>
@@ -80,9 +106,15 @@ const UserDetails = () => {
             </div>
 
             <div className="data-entry-container">
-              {/* Your existing data entry fields go here */}
-              <textarea className="text-box" placeholder="Grade: ">{(user.averageKnowledgeOfSubject
-              +user.averageApproachability+user.averagePreparedness+user.averageAvailability)/4}</textarea>
+              {/* Calculate the average score */}
+              <textarea className="text-box" placeholder="Grade: ">
+                {getLetterGrade(
+                  (user.averageKnowledgeOfSubject
+                  +user.averageApproachability
+                  +user.averagePreparedness
+                  +user.averageAvailability) / 4
+                )}
+              </textarea>
             </div>  
 
             <p><strong>Virtual:</strong> {user.virtual ? 'Yes' : 'No'}</p>
@@ -110,3 +142,4 @@ const UserDetails = () => {
 };
 
 export default UserDetails;
+
