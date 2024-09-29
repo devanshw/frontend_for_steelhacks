@@ -25,6 +25,7 @@ const UserDetails = () => {
     setError(null);
     setUser(null);
 
+    /* Don't Touch this import statement */
     try {
       const response = await fetch('http://localhost:3000/api/getuserdetails', {
         method: 'POST',
@@ -63,11 +64,27 @@ const UserDetails = () => {
           
           <div className="user-details">
             <p><strong>Course Name:</strong> {user.courseName}</p>
-            <p><strong>Department Name:</strong> {user.departmentName}</p>
-            <p><strong>Knowledge of Subject:</strong> {user.averageKnowledgeOfSubject}/10</p>
-            <p><strong>Approachability:</strong> {user.averageApproachability}/10</p>
-            <p><strong>Preparedness:</strong> {user.averagePreparedness}/10</p>
-            <p><strong>Availability:</strong> {user.averageAvailability}/10</p>
+            <p><strong>Department:</strong> {user.departmentName}</p>
+
+            <div className="side-by-side">
+              <p><strong>Knowledge of Subject:</strong> </p>
+              <p><strong>Approachability:</strong> </p>
+              <p><strong>Preparedness:</strong></p>
+              <p><strong>Availability:</strong></p>
+            </div>
+            <div className="circle-side-by-side">
+              <p className="circle">{user.averageKnowledgeOfSubject}/10</p>
+              <p className="circle">{user.averageApproachability}/10</p>
+              <p className="circle">{user.averagePreparedness}/10</p>
+              <p className="circle">{user.averageAvailability}/10</p>
+            </div>
+
+            <div className="data-entry-container">
+              {/* Your existing data entry fields go here */}
+              <textarea className="text-box" placeholder="Grade: ">{(user.averageKnowledgeOfSubject
+              +user.averageApproachability+user.averagePreparedness+user.averageAvailability)/4}</textarea>
+            </div>  
+
             <p><strong>Virtual:</strong> {user.virtual ? 'Yes' : 'No'}</p>
             <p><strong>In Person:</strong> {user.inPerson ? 'Yes' : 'No'}</p>
           </div>

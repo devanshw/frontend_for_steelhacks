@@ -43,3 +43,43 @@
   border-radius: 4px;
   margin-right: 10px;
 }
+
+.circle {
+  display: flex;
+  width: 75px; /* Set a fixed width */
+  height: 75px; /* Set the same height as width */
+  border: 2px solid rgb(107, 195, 250);
+  border-radius: 50%;
+  align-items: center; /* Center vertically */
+  text-align: center;
+  background-color: rgb(107, 195, 250); /* Light blue background */
+  font-size: 1.5em; /* Font size */
+  color: white; /* Text color */
+  justify-content: center; /* Center horizontally */
+ 
+}
+
+.side-by-side {
+  display: flex;
+  gap: 40px; /* Adjust the gap as needed */
+}
+
+.circle-side-by-side {
+  display: flex;
+  gap: 85px; /* Adjust the gap as needed */
+  align-items: center;
+  margin-left: 50px;
+}
+
+.text-box {
+  position: absolute; /* Position the text box absolutely */
+  top: 120px; /* Adjust the top position as needed */
+  right: 300px; /* Adjust the right position as needed */
+  width: 50px; /* Set the width of the text box */
+  height: 50px; /* Set the height of the text box */
+  padding: 10px; /* Add some padding */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 4px; /* Add rounded corners */
+  font-size: 1em; /* Set the font size */
+  resize: none; /* Disable resizing */
+}
