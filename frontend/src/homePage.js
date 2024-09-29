@@ -2,11 +2,15 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterTA = () => {
+<<<<<<< Updated upstream
   const navigate = useNavigate()
   const imageUrl = "https://i.ibb.co/fkw6TMy/Screenshot-2024-09-28-at-4-29-46-PM.png";
   const secondim = "https://i.ibb.co/tPLS7pn/Screenshot-2024-09-28-at-5-11-12-PM.png";
  const [isHoveredAddRegister, setIsHoveredAddRegister] = useState(false);
  const [isHoveredAddRating, setIsHoveredAddRating] = useState(false);
+=======
+  const imageUrl = "https://ibb.co/YcsnV21https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"; // Use the specific URL for the image
+>>>>>>> Stashed changes
 
   return (
     <div style={{ backgroundColor: '#FFFDFD', height: '100vh', position: 'relative' }}>
