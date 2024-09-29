@@ -50,7 +50,6 @@ const UserDetails = () => {
 
   return (
     <div className="user-details-container">
-      <h1>User Details</h1>
       
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="error">{error}</p>}
