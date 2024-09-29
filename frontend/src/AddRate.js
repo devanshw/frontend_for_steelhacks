@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddRating = () => {
   const navigate = useNavigate();
   const [knowledge, setKnowledge] = useState(0);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [selectedTA, setSelectedTA] = useState(null);
+  const [taName, setTaName] = useState(''); // Direct TA name input
   const [isInPerson, setIsInPerson] = useState(false);
   const [isZoom, setIsZoom] = useState(false);
   const [availability, setAvailability] = useState(0);
@@ -15,62 +13,41 @@ const AddRating = () => {
   const [approachability, setApproachability] = useState(0);
   const [comments, setComments] = useState('');
 
-  useEffect(() => {
-    const fetchTAs = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/getTAs');
-        setSuggestions(response.data);
-      } catch (error) {
-        console.error('Error fetching TA names:', error);
-      }
-    };
-
-    fetchTAs();
-  }, []);
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleSuggestionClick = (ta) => {
-    setSelectedTA(ta);
-    setSearchTerm(ta);
-    setSuggestions([]);
-  };
-
-  const filteredSuggestions = suggestions.filter(ta =>
-    ta.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+  // Submit form data to the API
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Prepare the data to send to the API
     const data = {
-      selectedTA,
-      knowledge,
-      preparedness,
-      availability,
-      approachability,
-      isInPerson,
-      isZoom,
-      comments,
+      firstName: taName, // Directly use the entered TA name
+      KnowledgeOfSubject: knowledge,
+      Approachability: approachability,
+      Preparedness: preparedness,
+      Availability: availability,
+      reviewComment: comments,
     };
 
     try {
-      await axios.post('http://localhost:3000/api/submitRating', data);
-      console.log('Data submitted successfully');
-    } catch (error) {
-      console.error('Error submitting data:', error);
-    }
+      // Send a POST request to your backend API
+      await axios.post('http://localhost:3000/api/rate', data);
+      console.log('Rating submitted successfully');
 
-    // Reset form fields
-    setKnowledge(0);
-    setPreparedness(0);
-    setAvailability(0);
-    setComments('');
-    setSearchTerm('');
-    setIsInPerson(false);
-    setIsZoom(false);
-    setSelectedTA(null);
+      // Reset form fields
+      setKnowledge(0);
+      setPreparedness(0);
+      setAvailability(0);
+      setComments('');
+      setTaName('');
+      setIsInPerson(false);
+      setIsZoom(false);
+      alert('Rating submitted successfully!');
+
+      // Navigate to home page after submission
+      navigate('/');
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+      alert('There was an error submitting the rating. Please try again.');
+    }
   };
 
   const handleHomeClick = () => {
@@ -98,29 +75,16 @@ const AddRating = () => {
 
         <h2>Add Rating</h2>
 
-        {/* Search Bar Section */}
+        {/* TA Name Input */}
         <div style={{ marginTop: '20px', width: '100%' }}>
-          <label htmlFor="search" style={{ marginBottom: '5px', display: 'block' }}>Search Teaching Assistant:</label>
+          <label htmlFor="taName" style={{ marginBottom: '5px', display: 'block' }}>Teaching Assistant's Name:</label>
           <input
             type="text"
-            id="search"
-            value={searchTerm}
-            onChange={handleSearchChange}
+            id="taName"
+            value={taName}
+            onChange={(e) => setTaName(e.target.value)}
             style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
-          {filteredSuggestions.length > 0 && (
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, border: '1px solid #ccc', borderRadius: '4px' }}>
-              {filteredSuggestions.map((ta, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleSuggestionClick(ta)}
-                  style={{ padding: '8px', cursor: 'pointer', backgroundColor: '#f9f9f9' }}
-                >
-                  {ta}
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
 
         {/* Rating and Comments Sections */}
@@ -219,4 +183,3 @@ const AddRating = () => {
 };
 
 export default AddRating;
-
