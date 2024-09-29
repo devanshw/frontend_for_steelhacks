@@ -144,34 +144,6 @@ const AddRating = () => {
           />
           <span>{availability}/10</span>
 
-        {/* Checkbox for inPerson and Zoom */}
-{/* Checkbox for inPerson and Zoom */}
-<div style={{ display: 'flex', alignItems: 'center' }}>
-  <label style={{ marginRight: '20px', display: 'flex', alignItems: 'center' }}>
-    <span style={{ whiteSpace: 'nowrap' }}>In Person</span>
-    <input
-      type="checkbox"
-      name="inPerson"
-      checked={isInPerson}
-      onChange={(e) => setIsInPerson(e.target.checked)}
-      style={{ marginLeft: '5px', marginTop: '12px' }} // Adjust spacing between label and checkbox
-    />
-  </label>
-  <label style={{ display: 'flex', alignItems: 'center' }}>
-    <span style={{ whiteSpace: 'nowrap' }}>Zoom</span>
-    <input
-      type="checkbox"
-      name="zoom"
-      checked={isZoom}
-      onChange={(e) => setIsZoom(e.target.checked)}
-      style={{ marginLeft: '5px', marginTop: '12px'}} // Adjust spacing between label and checkbox
-    />
-  </label>
-</div>
-
-
-
-
           {/* Comments Section */}
           <label htmlFor="comments">Comments:</label>
           <textarea
