@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './UserDetails.css';
 
 const UserDetails = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // Initialize navigate for routing
+  const navigate = useNavigate();
 
   // Extract the firstName from the URL query string
   const location = useLocation();
@@ -74,9 +77,28 @@ const UserDetails = () => {
     return 'grade-red'; // For 'F'
   };
 
+  // Function to handle home click
+  const handleHomeClick = () => {
+    navigate('/homepage'); // Adjust the path as necessary
+  };
+
   return (
     <div className="user-details-container">
-      
+      {/* Home Image */}
+      <img
+        src="https://i.ibb.co/fkw6TMy/Screenshot-2024-09-28-at-4-29-46-PM.png"
+        alt="Home"
+        style={{ 
+          width: '120px', 
+          height: '120px', 
+          cursor: 'pointer', 
+          position: 'absolute', // Use absolute positioning
+          top: '30px', // Adjust this to move it lower
+          right: '70px' // Adjust this to move it more to the left
+        }}
+        onClick={handleHomeClick}
+      />
+
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="error">{error}</p>}
 
@@ -90,7 +112,6 @@ const UserDetails = () => {
           <div className="user-details">
             <p><strong>Course Name:</strong> {user.courseName}</p>
             <p><strong>Department:</strong> {user.departmentName.toUpperCase()}</p>
-
 
             <div className="side-by-side">
               <p><strong>Knowledge of Subject:</strong> </p>
@@ -142,4 +163,3 @@ const UserDetails = () => {
 };
 
 export default UserDetails;
-

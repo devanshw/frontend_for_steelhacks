@@ -12,6 +12,9 @@ const App = () => {
         <Route path="/newUser" element={<NewUser/>} />
         <Route path="/userFound" element={<Found/>} />
         <Route path= "/addRating" element={<AddRate />} />
+        <Route path="/homepage" element={<Home />} />
+        
+
 
 
         {/* Add more routes here if needed */}
