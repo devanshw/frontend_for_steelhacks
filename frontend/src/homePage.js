@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterTA = () => {
@@ -7,10 +7,12 @@ const RegisterTA = () => {
   const secondim = "https://i.ibb.co/tPLS7pn/Screenshot-2024-09-28-at-5-11-12-PM.png";
  const [isHoveredAddRegister, setIsHoveredAddRegister] = useState(false);
  const [isHoveredAddRating, setIsHoveredAddRating] = useState(false);
+  //const imageUrl = "https://ibb.co/YcsnV21https://t3.ftcdn.net/jpg/00/64/67/80/360_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg"; // Use the specific URL for the image
 
   return (
     <div style={{ backgroundColor: '#FFFDFD', height: '100vh', position: 'relative' }}>
-       <button
+      {/* Add Rating Button */}
+      <button
         style={{
           position: 'absolute',
           top: '25px',
@@ -31,6 +33,7 @@ const RegisterTA = () => {
         Add Rating
       </button>
 
+      {/* Register as a TA Button */}
       <button
         style={{
           position: 'absolute',
@@ -44,45 +47,62 @@ const RegisterTA = () => {
           padding: '25px 30px',
           fontSize: '20px',
           cursor: 'pointer'
-      }}
-      onMouseEnter={() => setIsHoveredAddRegister(true)}
-      onMouseLeave={() => setIsHoveredAddRegister(false)}
-     onClick={() => navigate('/newUser')}
-    >
+        }}
+        onMouseEnter={() => setIsHoveredAddRegister(true)}
+        onMouseLeave={() => setIsHoveredAddRegister(false)}
+        onClick={() => navigate('/newUser')}
+      >
         Register as a TA
       </button>
-      
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '30px'}}>
+
+      {/* Main content with search input */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '30px' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <img 
-             src={imageUrl} 
-             alt="Teaching Assistant 1" 
-             style={{ width: '250px', marginBottom: '10px' }} 
+            src={imageUrl} 
+            alt="Teaching Assistant 1" 
+            style={{ width: '250px', marginBottom: '10px' }} 
           />
-          
-
         </div>
-
-        
 
         <img 
           src={secondim} 
           alt="Teaching Assistant Additional" 
           style={{ width: '500px' }} 
-          />
-          
+        />
+
+        {/* Search Input for Teaching Assistant */}
         <input
           type="text"
           placeholder="Search for Teaching Assistant"
+          value={searchTerm} // Bind value to state
+          onChange={(e) => setSearchTerm(e.target.value)} // Update state on input change
+          onKeyPress={handleKeyPress} // Listen for 'Enter' key press
           style={{
             padding: '10px',
             width: '300px',
             borderRadius: '5px',
             border: '1px solid #ccc',
-            outline: 'none'
+            outline: 'none',
+            fontSize: '16px',
+            marginBottom: '10px'
           }}
         />
-        
+        <button
+          onClick={handleSearch} // Trigger search on button click
+          style={{
+            padding: '10px 20px',
+            backgroundColor: 'orange',
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '5px',
+            border: 'none',
+            cursor: 'pointer',
+            fontSize: '16px'
+          }}
+        >
+          Search
+        </button>
       </div>
     </div>
   );

@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import './UserDetails.css'; // Import external CSS file for styling
-
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import './UserDetails.css';
 
 const UserDetails = () => {
-  const [firstName, setFirstName] = useState('');
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleFetchUser = async () => {
-    const trimmedFirstName = firstName.trim();
-    if (!trimmedFirstName) {
-      setError('Please enter a valid first name');
-      return;
+  // Extract the firstName from the URL query string
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const firstName = queryParams.get('firstName');
+
+  useEffect(() => {
+    if (firstName) {
+      handleFetchUser();
     }
+  }, [firstName]);
+
+  const handleFetchUser = async () => {
+    if (!firstName) return;
 
     setLoading(true);
     setError(null);
@@ -25,7 +31,7 @@ const UserDetails = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName: trimmedFirstName }),
+        body: JSON.stringify({ firstName }),
       });
 
       const data = await response.json();
@@ -44,19 +50,7 @@ const UserDetails = () => {
 
   return (
     <div className="user-details-container">
-      <h1>User Details</h1>
       
-      <div className="input-container">
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          placeholder="Enter First Name"
-          className="input-field"
-        />
-        <button onClick={handleFetchUser} className="fetch-button">Fetch User</button>
-      </div>
-
       {loading && <p className="loading">Loading...</p>}
       {error && <p className="error">{error}</p>}
 

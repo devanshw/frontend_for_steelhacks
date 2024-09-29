@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './NewUserPage.css'; // Make sure to import the CSS file
 
 const NewUserPage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -16,6 +18,8 @@ const NewUserPage = () => {
     success: false,
     error: null,
   });
+
+  const [showPopup, setShowPopup] = useState(false); // State for popup visibility
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +54,7 @@ const NewUserPage = () => {
       }
 
       const result = await response.json();
-      console.log('User created successfully:', result);
+   //   console.log('User created successfully:', result);
       setSubmitStatus({ success: true, error: null });
       setFormData({
         firstName: '',
@@ -61,6 +65,13 @@ const NewUserPage = () => {
         professorName: '',
         email: '',
       });
+
+      // Show the popup and navigate back after 2 seconds
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+        navigate('/'); // Redirect to homepage
+      }, 2000);
     } catch (error) {
       console.error('Error creating user:', error);
       setSubmitStatus({ success: false, error: error.message });
@@ -100,8 +111,25 @@ const NewUserPage = () => {
         </label>
         <button type="submit">Submit</button>
       </form>
+
       {submitStatus.success && <p>User created successfully!</p>}
       {submitStatus.error && <p style={{ color: 'red' }}>Error: {submitStatus.error}</p>}
+
+      {/* Popup for successful user creation */}
+      {showPopup && (
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          backgroundColor: 'green',
+          color: 'white',
+          padding: '10px 20px',
+          borderRadius: '5px',
+          zIndex: 1000,
+        }}>
+          User created successfully!
+        </div>
+      )}
     </div>
   );
 };
