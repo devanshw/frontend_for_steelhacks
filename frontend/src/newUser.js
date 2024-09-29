@@ -112,7 +112,7 @@ const NewUserPage = () => {
         <button type="submit">Submit</button>
       </form>
 
-      {submitStatus.success && <p>User created successfully!</p>}
+      {submitStatus.success && <p></p>}
       {submitStatus.error && <p style={{ color: 'red' }}>Error: {submitStatus.error}</p>}
 
       {/* Popup for successful user creation */}
@@ -127,7 +127,7 @@ const NewUserPage = () => {
           borderRadius: '5px',
           zIndex: 1000,
         }}>
-          User created successfully!
+          User created successfully
         </div>
       )}
     </div>
